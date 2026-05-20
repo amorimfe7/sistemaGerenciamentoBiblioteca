@@ -14,7 +14,7 @@ public interface IUsuarioDAO {
     Usuario buscarUsuarioPorId(int id);
 
     //U
-    void atualizarUsuario(Usuario usuario);
+    Usuario atualizarUsuario(Usuario usuario);
 
     //D
     void deletarUsuario(int id);
