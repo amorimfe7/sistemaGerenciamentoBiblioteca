@@ -83,8 +83,8 @@ public class UsuarioDAOImplements implements IUsuarioDAO {
                 );
             };
 
-        } catch (Exception e) {
-            System.err.println("Erro ao tentar buscar usuário -> " + e.getMessage());
+        } catch (SQLException e) {
+            System.err.println("Erro ao tentar buscar usuário! -> " + e.getMessage());
         }
 
         return usuarioEncontrado;
@@ -98,6 +98,18 @@ public class UsuarioDAOImplements implements IUsuarioDAO {
 
     @Override
     public void deletarUsuario(int id) {
+        String sql = "DELETE from usuario WHERE id_usuario = ?";
+
+        try(Connection conn = sqlConn.getConnection()){
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+
+            System.out.printf("Usuário [%d] deletado com sucesso!",id);
+
+        } catch (SQLException e){
+            System.err.println("Erro ao tentar deletar usuário! -> " + e.getMessage());
+        }
 
     }
 }
