@@ -38,10 +38,26 @@ public class Usuario {
     };
 
     public String toString(){
-        return String.format("ID: %d"+
-                "Nome: %s" +
-                "Endereço: %s" +
-                "Telefone: %d", id_usuario, nome, endereco, telefone);
+        return String.format(
+                "ID: %d | "+
+                "Nome: %s | " +
+                "Endereço: %s | " +
+                "Telefone: %s", id_usuario, nome, endereco, telefone);
     }
 
+    public void setId_usuario(int id_usuario) {
+        this.id_usuario = id_usuario;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
 }

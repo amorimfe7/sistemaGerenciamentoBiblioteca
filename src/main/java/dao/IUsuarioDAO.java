@@ -7,7 +7,7 @@ import java.util.List;
 public interface IUsuarioDAO {
 
     //C
-    void cadastrarUsuario(Usuario usuario);
+    void salvarUsuario(Usuario usuario);
 
     //R
     List<Usuario> listarUsuario();
