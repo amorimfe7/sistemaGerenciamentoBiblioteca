@@ -1,6 +1,5 @@
 package daoImplements;
 
-import com.mysql.cj.protocol.Resultset;
 import dao.IUsuarioDAO;
 import database.sqlConn;
 import model.Usuario;
@@ -65,7 +64,31 @@ public class UsuarioDAOImplements implements IUsuarioDAO {
 
     @Override
     public Usuario buscarUsuarioPorId(int id) {
-        return null;
+        String sql = ("SELECT id_usuario, nome, endereco, telefone FROM usuario WHERE id_usuario = ?");
+        Usuario usuarioEncontrado = null;
+
+        try(Connection conn = sqlConn.getConnection()){
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            stmt.setInt(1,id);
+
+            ResultSet rs = stmt.executeQuery();
+
+           while (rs.next()){
+                usuarioEncontrado = new Usuario(
+                        rs.getInt("id_usuario"),
+                        rs.getString("nome"),
+                        rs.getString("endereco"),
+                        rs.getString("telefone")
+                );
+            };
+
+        } catch (Exception e) {
+            System.err.println("Erro ao tentar buscar usuário -> " + e.getMessage());
+        }
+
+        return usuarioEncontrado;
+
     }
 
     @Override
