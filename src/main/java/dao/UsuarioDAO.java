@@ -1,0 +1,22 @@
+package dao;
+
+import model.Usuario;
+
+import java.util.List;
+
+public interface UsuarioDAO {
+
+    //C
+    void cadastrarUsuario(Usuario usuario);
+
+    //R
+    List<Usuario> listarUsuario();
+    Usuario buscarUsuarioPorId(int id);
+
+    //U
+    void atualizarUsuario(Usuario usuario);
+
+    //D
+    void deletarUsuario(int id);
+
+}
