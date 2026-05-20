@@ -1,5 +1,6 @@
 package daoImplements;
 
+import com.mysql.cj.jdbc.exceptions.SQLError;
 import dao.IUsuarioDAO;
 import database.sqlConn;
 import model.Usuario;
@@ -92,8 +93,30 @@ public class UsuarioDAOImplements implements IUsuarioDAO {
     }
 
     @Override
-    public void atualizarUsuario(Usuario usuario) {
+    public Usuario atualizarUsuario(Usuario usuario) {
+        String sql = "UPDATE usuario SET nome = ?, endereco = ?, telefone = ? WHERE id_usuario = ?";
+        Usuario usuarioAtualizado = null;
 
+        try (Connection conn = sqlConn.getConnection()){
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            stmt.setString(1, usuario.getNome());
+            stmt.setString(2, usuario.getEndereco());
+            stmt.setString(3, usuario.getTelefone());
+            stmt.setInt(4, usuario.getId());
+
+            int linhasAfetadas = stmt.executeUpdate();
+
+            if(linhasAfetadas > 0) {
+                System.out.printf("Usuário [%d] atualizado com sucesso!", usuario.getId());
+            } else {
+                System.out.println("Nenhum usuário encontrado com esse ID");
+            }
+
+        } catch (SQLException e){
+            System.err.println("Erro ao tentar atualizar usuário! ->" + e.getMessage());
+        }
+        return usuarioAtualizado;
     }
 
     @Override
