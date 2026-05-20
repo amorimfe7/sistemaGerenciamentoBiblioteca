@@ -21,4 +21,45 @@ public class Livro {
         this.editora = editora;
     }
 
+    public int getId_livro() {
+        return id_livro;
+    }
+
+    public void setId_livro(int id_livro) {
+        this.id_livro = id_livro;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public String getEditora() {
+        return editora;
+    }
+
+    public void setEditora(String editora) {
+        this.editora = editora;
+    }
+
+
+    public String toString(){
+        return String.format(
+                "ID: %d | "+
+                "Nome: %s | " +
+                "Autor: %s | " +
+                "Editora: %s", id_livro, nome, autor, editora);
+    }
+
 }
