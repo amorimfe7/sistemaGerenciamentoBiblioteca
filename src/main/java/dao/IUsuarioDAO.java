@@ -4,7 +4,7 @@ import model.Usuario;
 
 import java.util.List;
 
-public interface UsuarioDAO {
+public interface IUsuarioDAO {
 
     //C
     void cadastrarUsuario(Usuario usuario);
