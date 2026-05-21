@@ -107,7 +107,7 @@ public class LivroDAOImplements implements ILivroDAO {
             livroAtualizado.setEditora(livro.getEditora());
 
             if(linhasAfetadas > 0){
-                System.out.printf("Livro [%d] foi atualizado com sucesso!\n" , livro.getId_livro());
+                System.out.printf("Livro '%d' foi atualizado com sucesso!\n" , livro.getNome());
             } else {
                 System.out.printf("Nenhum livro foi encontrado com esse ID [%d]", livro.getId_livro());
             }
@@ -121,7 +121,25 @@ public class LivroDAOImplements implements ILivroDAO {
     }
 
     @Override
-    public void deletarLivro(int ido) {
+    public void deletarLivro(int id) {
+        String sql = "DELETE FROM livro WHERE id_livro = ?";
 
+        try (Connection conn = sqlConn.getConnection()){
+
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1,id);
+
+            int linhasAfetadas = stmt.executeUpdate();
+
+            if(linhasAfetadas > 0) {
+                System.out.printf("Livro [%d] deletado com sucesso!", id);
+            } else {
+                System.out.printf("Nenhum livro com o 'id = %d' foi encontrado para ser deletado", id);
+                System.out.println("Insira um ID existente na Lista de Livros, e tente novamente.");
+            }
+
+        } catch (SQLException e){
+            System.err.println("Erro ao tentar deletar livro " + "[" + id + "]! -> " + e.getMessage());
+        }
     }
 }
