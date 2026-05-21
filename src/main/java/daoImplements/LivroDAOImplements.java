@@ -61,7 +61,29 @@ public class LivroDAOImplements implements ILivroDAO {
 
     @Override
     public Livro buscaLivroPorId(int id) {
-        return null;
+        String sql = ("SELECT id_livro, nome, autor, editora FROM livro WHERE id_livro = ?");
+        Livro livroPesquisado = null;
+
+        try(Connection conn = sqlConn.getConnection()){
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()){
+                livroPesquisado = new Livro(
+                        rs.getInt("id_livro"),
+                        rs.getString("nome"),
+                        rs.getString("autor"),
+                        rs.getString("editora")
+                );
+            }
+
+        } catch (SQLException e){
+            System.err.println("Erro ao tentar buscar livro com ID [%d]" + e.getMessage());
+        }
+
+        return livroPesquisado;
     }
 
     @Override
