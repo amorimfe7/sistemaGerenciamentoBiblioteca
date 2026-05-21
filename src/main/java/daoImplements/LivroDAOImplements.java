@@ -6,7 +6,9 @@ import model.Livro;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LivroDAOImplements implements ILivroDAO {
@@ -32,7 +34,29 @@ public class LivroDAOImplements implements ILivroDAO {
 
     @Override
     public List<Livro> listarLivros() {
-        return List.of();
+        String sql = "SELECT * FROM livro";
+        List<Livro> listaLivros = new ArrayList<>();
+
+        try (Connection conn = sqlConn.getConnection()){
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()){
+                listaLivros.add( new Livro(
+                        rs.getInt("id_livro"),
+                        rs.getString("nome"),
+                        rs.getString("autor"),
+                        rs.getString("editora")
+                ));
+            }
+
+            System.out.println("Lista de livros gerada com sucesso!");
+
+        } catch (SQLException e){
+            System.err.println("Erro ao tentar listar livros cadastrados! -> " + e.getMessage());
+        }
+
+        return listaLivros;
     }
 
     @Override
