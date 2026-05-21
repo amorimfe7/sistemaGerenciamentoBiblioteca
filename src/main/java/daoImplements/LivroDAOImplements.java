@@ -62,7 +62,7 @@ public class LivroDAOImplements implements ILivroDAO {
     @Override
     public Livro buscaLivroPorId(int id) {
         String sql = ("SELECT id_livro, nome, autor, editora FROM livro WHERE id_livro = ?");
-        Livro livroPesquisado = null;
+        Livro livroPesquisado = new Livro();
 
         try(Connection conn = sqlConn.getConnection()){
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -88,7 +88,36 @@ public class LivroDAOImplements implements ILivroDAO {
 
     @Override
     public Livro atualizarLivro(Livro livro) {
-        return null;
+        String sql = "UPDATE livro SET nome = ?, autor = ?, editora = ? WHERE id_livro = ?";
+        Livro livroAtualizado = new Livro();
+
+        try(Connection conn = sqlConn.getConnection()){
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+
+            stmt.setInt(4,livro.getId_livro());
+            stmt.setString(1, livro.getNome());
+            stmt.setString(2, livro.getAutor());
+            stmt.setString(3, livro.getEditora());
+            int linhasAfetadas = stmt.executeUpdate();
+
+            livroAtualizado.setId_livro(livro.getId_livro());
+            livroAtualizado.setNome(livro.getNome());
+            livroAtualizado.setAutor(livro.getAutor());
+            livroAtualizado.setEditora(livro.getEditora());
+
+            if(linhasAfetadas > 0){
+                System.out.printf("Livro [%d] foi atualizado com sucesso!\n" , livro.getId_livro());
+            } else {
+                System.out.printf("Nenhum livro foi encontrado com esse ID [%d]", livro.getId_livro());
+            }
+
+
+        } catch (SQLException e){
+            System.err.println("Erro ao tentar atualizar dados do Livro! -> " + e.getMessage());
+        }
+
+        return livroAtualizado;
     }
 
     @Override
