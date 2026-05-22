@@ -24,7 +24,7 @@ public class LivroDAOImplements implements ILivroDAO {
 
             stmt.executeUpdate();
 
-            System.out.printf("O livro '%s' foi cadastrado com sucesso!", livro.getNome());
+            System.out.printf("O livro '%s' foi cadastrado com sucesso!\n", livro.getNome());
 
         } catch (SQLException e){
             System.err.println("Erro ao tentar cadastrar livro! ->" + e.getMessage());
@@ -50,7 +50,7 @@ public class LivroDAOImplements implements ILivroDAO {
                 ));
             }
 
-            System.out.println("Lista de livros gerada com sucesso!");
+            System.out.println("Lista de livros gerada com sucesso!\n");
 
         } catch (SQLException e){
             System.err.println("Erro ao tentar listar livros cadastrados! -> " + e.getMessage());
@@ -107,7 +107,7 @@ public class LivroDAOImplements implements ILivroDAO {
             livroAtualizado.setEditora(livro.getEditora());
 
             if(linhasAfetadas > 0){
-                System.out.printf("Livro '%d' foi atualizado com sucesso!\n" , livro.getNome());
+                System.out.printf("Livro '%s' foi atualizado com sucesso!\n" , livro.getNome());
             } else {
                 System.out.printf("Nenhum livro foi encontrado com esse ID [%d]", livro.getId_livro());
             }
@@ -132,9 +132,9 @@ public class LivroDAOImplements implements ILivroDAO {
             int linhasAfetadas = stmt.executeUpdate();
 
             if(linhasAfetadas > 0) {
-                System.out.printf("Livro [%d] deletado com sucesso!", id);
+                System.out.printf("Livro [%d] deletado com sucesso!\n", id);
             } else {
-                System.out.printf("Nenhum livro com o 'id = %d' foi encontrado para ser deletado", id);
+                System.out.printf("Nenhum livro com o 'id = %d' foi encontrado para ser deletado\n", id);
                 System.out.println("Insira um ID existente na Lista de Livros, e tente novamente.");
             }
 

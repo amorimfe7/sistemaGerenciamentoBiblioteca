@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class sqlConn {
     private static final String url ="jdbc:mysql://localhost:3306/sistema_gerenc_biblioteca";
     private static final String user = "root";
-    private static final String pwd = "####";
+    private static final String pwd = "Senai@134";
 
     public static Connection getConnection() throws SQLException{
         return DriverManager.getConnection(url,user,pwd);

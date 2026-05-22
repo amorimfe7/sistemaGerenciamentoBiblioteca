@@ -7,7 +7,7 @@ public class Livro {
     private String editora;
 
     //CADASTRO LIVRO
-    public Livro(String nome, String autor, String editora){
+    public Livro(String nome, String autor, String editora) {
         this.nome = nome;
         this.autor = autor;
         this.editora = editora;
@@ -20,6 +20,11 @@ public class Livro {
         this.autor = autor;
         this.editora = editora;
     }
+
+    public Livro(){
+
+    }
+
 
     public int getId_livro() {
         return id_livro;

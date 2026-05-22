@@ -30,7 +30,7 @@ public class UsuarioDAOImplements implements IUsuarioDAO {
                 usuario.setId_usuario(chavePk.getInt(1));
             }
 
-            System.out.println("Usuário cadastrado com sucesso!");
+            System.out.printf("Usuário [%s] cadastrado com sucesso!\n", usuario.getNome());
 
         }catch (Exception e){
             throw new RuntimeException("Erro ao cadastrar Usuário ->" + e.getMessage());
@@ -108,9 +108,9 @@ public class UsuarioDAOImplements implements IUsuarioDAO {
             int linhasAfetadas = stmt.executeUpdate();
 
             if(linhasAfetadas > 0) {
-                System.out.printf("Usuário [%d] atualizado com sucesso!", usuario.getId());
+                System.out.printf("Usuário [%d] atualizado com sucesso!\n", usuario.getId());
             } else {
-                System.out.println("Nenhum usuário encontrado com esse ID");
+                System.out.println("Nenhum usuário encontrado com esse ID\n");
             }
 
         } catch (SQLException e){
@@ -128,7 +128,7 @@ public class UsuarioDAOImplements implements IUsuarioDAO {
             stmt.setInt(1, id);
             stmt.executeUpdate();
 
-            System.out.printf("Usuário [%d] deletado com sucesso!",id);
+            System.out.printf("Usuário [%d] deletado com sucesso!\n",id);
 
         } catch (SQLException e){
             System.err.println("Erro ao tentar deletar usuário! -> " + e.getMessage());
